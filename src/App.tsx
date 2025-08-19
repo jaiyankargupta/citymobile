@@ -1,25 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import ShopPage from './pages/ShopPage';
+import AboutPage from './pages/AboutPage';
+import ShopsPage from './pages/ShopsPage';
+import ShopDetailPage from './components/ShopDetailPage';
+import Navigation from './components/Navigation';
+import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+        <Navigation />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/shop" element={<ShopPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/shops" element={<ShopsPage />} />
+          <Route path="/shop/:shopId" element={<ShopDetailPage />} />
+        </Routes>
+        <Footer />
+        <ScrollToTop />
+      </div>
+    </Router>
   );
 }
 

@@ -1,46 +1,141 @@
-# Getting Started with Create React App
+# LinkTree Website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, responsive React website with three main pages featuring shop links, Google Maps integration, and location information.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+### 🏠 Home Page
+- Modern hero section with call-to-action buttons
+- Feature cards linking to shop and location pages
+- Statistics section showcasing business metrics
+- Responsive design with smooth animations
 
-### `npm start`
+### 🛍️ Shop Page
+- Product catalog with categories (Electronics, Clothing, Home & Garden, Books)
+- Product cards with ratings, prices, and external shop links
+- Featured shops section with direct links to major retailers
+- Filter functionality by product category
+- Links to Amazon, Best Buy, Nike, Target, Barnes & Noble, and Newegg
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 📍 Location Page
+- Interactive Google Maps integration
+- Store information with address, phone, and email
+- Store hours for all days of the week
+- Transportation information (subway, bus, car)
+- Direct links to Google Maps and directions
+- Why visit us section highlighting store benefits
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Technologies Used
 
-### `npm test`
+- **React 18** with TypeScript
+- **React Router** for navigation
+- **Tailwind CSS** for styling
+- **Heroicons** for icons
+- **Google Maps API** for location services
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Getting Started
 
-### `npm run build`
+### Prerequisites
+- Node.js (version 14 or higher)
+- npm or yarn
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Installation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd linktree-website
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. Install dependencies:
+```bash
+npm install
+```
 
-### `npm run eject`
+3. Start the development server:
+```bash
+npm start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+4. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Available Scripts
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- `npm start` - Runs the app in development mode
+- `npm test` - Launches the test runner
+- `npm run build` - Builds the app for production
+- `npm run eject` - Ejects from Create React App (one-way operation)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Project Structure
 
-## Learn More
+```
+src/
+├── components/
+│   └── Navigation.tsx          # Main navigation component
+├── pages/
+│   ├── HomePage.tsx           # Landing page
+│   ├── ShopPage.tsx           # Product catalog page
+│   └── LocationPage.tsx       # Store location page
+├── App.tsx                    # Main app component with routing
+├── index.tsx                  # App entry point
+└── index.css                  # Global styles with Tailwind
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Customization
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Adding New Products
+Edit the `products` array in `src/pages/ShopPage.tsx` to add new products with:
+- Product name, category, price, rating
+- Product image URL
+- Shop URL and shop name
+
+### Updating Store Information
+Modify the `storeInfo` object in `src/pages/LocationPage.tsx` to update:
+- Store address and contact information
+- Store hours
+- Map coordinates
+
+### Styling
+The project uses Tailwind CSS for styling. You can customize:
+- Colors in `tailwind.config.js`
+- Global styles in `src/index.css`
+- Component-specific styles using Tailwind classes
+
+## Deployment
+
+### Build for Production
+```bash
+npm run build
+```
+
+This creates a `build` folder with optimized production files.
+
+### Deploy to Netlify/Vercel
+1. Push your code to GitHub
+2. Connect your repository to Netlify or Vercel
+3. Set build command to `npm run build`
+4. Set publish directory to `build`
+
+## Google Maps Integration
+
+The location page includes Google Maps integration. To use your own API key:
+
+1. Get a Google Maps API key from the [Google Cloud Console](https://console.cloud.google.com/)
+2. Replace the API key in the iframe src URL in `LocationPage.tsx`
+3. Enable the Maps Embed API in your Google Cloud project
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## Support
+
+For support or questions, please open an issue in the repository.
