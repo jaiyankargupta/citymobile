@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   MagnifyingGlassIcon, 
-  MapPinIcon, 
   PhoneIcon, 
   ClockIcon,
   StarIcon,
@@ -27,7 +26,7 @@ const ShopsPage: React.FC = () => {
   }, []);
 
   const handleViewDetails = (shopId: string) => {
-    navigate(`/shop-${shopId}`);
+    navigate(`/shop/${shopId}`);
   };
 
   const renderStars = (rating: number) => {
