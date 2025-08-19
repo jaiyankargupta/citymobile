@@ -83,7 +83,7 @@ const HomePage: React.FC = () => {
             {/* Trust Badge */}
             <div className="inline-flex items-center px-3 py-2 md:px-4 md:py-2 bg-white/80 backdrop-blur-sm rounded-full border border-indigo-200 mb-6 md:mb-8">
               <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
-              <span className="text-xs md:text-sm font-medium text-indigo-700">Trusted by 1000+ Customers</span>
+              <span className="text-xs md:text-sm font-medium text-indigo-700">Trusted by 500000+ Customers</span>
             </div>
             
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 mb-4 md:mb-6 leading-tight">
@@ -127,7 +127,7 @@ const HomePage: React.FC = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 max-w-4xl mx-auto px-4">
               <div className="text-center">
                 <div className="text-2xl md:text-3xl mb-2">Customers</div>
-                <div className="text-2xl md:text-3xl font-bold text-indigo-600 mb-2">1000+</div>
+                <div className="text-2xl md:text-3xl font-bold text-indigo-600 mb-2">500000+</div>
                 <div className="text-sm md:text-base text-gray-600">Happy Customers</div>
               </div>
               <div className="text-center">
