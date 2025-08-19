@@ -14,7 +14,7 @@ import {
 
 const AboutPage: React.FC = () => {
   const stats = [
-    { icon: UsersIcon, number: '1000+', label: 'Happy Customers' },
+    { icon: UsersIcon, number: '500000+', label: 'Happy Customers' },
     { icon: StarIcon, number: '4.7', label: 'Average Rating' },
     { icon: ClockIcon, number: '15+', label: 'Years Experience' },
     { icon: TruckIcon, number: '3', label: 'Shop Locations' },
