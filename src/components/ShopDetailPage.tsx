@@ -20,49 +20,6 @@ const ShopDetailPage: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [shopId]);
 
-  // Function to check if shop is currently open
-  const isShopOpen = () => {
-    if (!shop) return false;
-    
-    const now = new Date();
-    const currentHour = now.getHours();
-    const currentMinute = now.getMinutes();
-    const currentTime = currentHour * 60 + currentMinute; // Convert to minutes
-    
-    // Parse business hours (assuming format: "9:00 AM - 9:30 PM")
-    const hours = shop.hours;
-    const [openTime, closeTime] = hours.split(' - ');
-    
-    // Convert open time to minutes
-    const openMatch = openTime.match(/(\d+):(\d+)\s*(AM|PM)/);
-    if (!openMatch) return false;
-    
-    let openHour = parseInt(openMatch[1]);
-    const openMinute = parseInt(openMatch[2]);
-    const openPeriod = openMatch[3];
-    
-    if (openPeriod === 'PM' && openHour !== 12) openHour += 12;
-    if (openPeriod === 'AM' && openHour === 12) openHour = 0;
-    
-    const openTimeMinutes = openHour * 60 + openMinute;
-    
-    // Convert close time to minutes
-    const closeMatch = closeTime.match(/(\d+):(\d+)\s*(AM|PM)/);
-    if (!closeMatch) return false;
-    
-    let closeHour = parseInt(closeMatch[1]);
-    const closeMinute = parseInt(closeMatch[2]);
-    const closePeriod = closeMatch[3];
-    
-    if (closePeriod === 'PM' && closeHour !== 12) closeHour += 12;
-    if (closePeriod === 'AM' && closeHour === 12) closeHour = 0;
-    
-    const closeTimeMinutes = closeHour * 60 + closeMinute;
-    
-    // Check if current time is within business hours
-    return currentTime >= openTimeMinutes && currentTime <= closeTimeMinutes;
-  };
-
   const customerReviews = [
     {
       id: 1,
@@ -135,9 +92,9 @@ const ShopDetailPage: React.FC = () => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
       if (i <= rating) {
-        stars.push(<StarSolidIcon key={i} className="h-5 w-5 text-yellow-400" />);
+        stars.push(<StarSolidIcon key={i} className="h-4 w-4 text-yellow-400" />);
       } else {
-        stars.push(<StarIcon key={i} className="h-5 w-5 text-gray-300" />);
+        stars.push(<StarIcon key={i} className="h-4 w-4 text-gray-300" />);
       }
     }
     return stars;
@@ -169,15 +126,28 @@ const ShopDetailPage: React.FC = () => {
                 <div>
                   <h2 className="text-3xl font-bold text-gray-900 mb-2">{shop.name}</h2>
                   <p className="text-lg text-gray-600">{shop.address}</p>
-                  <p className="text-gray-600">{shop.city}</p>
+                                      <p className="text-gray-600">{shop.location}</p>
                 </div>
                 <div className="text-right">
-                  <div className="flex items-center mb-2">
-                    {renderStars(shop.rating)}
-                    <span className="ml-2 text-lg font-semibold text-gray-900">{shop.rating}</span>
+                  <div className="flex items-center space-x-4">
+                    <StarIcon className="h-6 w-6 text-indigo-600" />
+                    <div>
+                      <p className="text-gray-600 font-medium">Rating</p>
+                      <div className="flex items-center">
+                        {renderStars(shop.rating)}
+                        <span className="ml-2 text-gray-900 font-semibold">{shop.rating}</span>
+                        <span className="ml-2 text-gray-600">({shop.reviews} reviews)</span>
+                      </div>
+                    </div>
                   </div>
-                  <p className="text-gray-600">({shop.reviews} reviews)</p>
-                  <p className="text-sm text-gray-500">{shop.yearsInBusiness} years in business</p>
+                  
+                  <div className="flex items-center space-x-4">
+                    <ClockIcon className="h-6 w-6 text-indigo-600" />
+                    <div>
+                      <p className="text-gray-600 font-medium">Years in Business</p>
+                      <p className="text-gray-900 font-semibold">{shop.yearsInBusiness} years</p>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -188,10 +158,10 @@ const ShopDetailPage: React.FC = () => {
                   className="group flex items-center justify-center px-6 py-4 bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold rounded-xl hover:from-green-600 hover:to-green-700 transform hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-xl"
                 >
                   <PhoneIcon className="h-5 w-5 mr-2 group-hover:scale-110 transition-transform" />
-                  Call Now: {shop.callNow}
+                  Call Now: {shop.phone}
                 </a>
                 <a
-                  href={`https://wa.me/${shop.whatsapp}`}
+                  href={`https://wa.me/${shop.whatsapp.replace('+91', '91')}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group flex items-center justify-center px-6 py-4 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-semibold rounded-xl hover:from-emerald-600 hover:to-emerald-700 transform hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-xl"
@@ -203,27 +173,18 @@ const ShopDetailPage: React.FC = () => {
 
               {/* Quick Info */}
               <div className="grid md:grid-cols-2 gap-6">
-                <div className="flex items-center space-x-3">
+                <div className="flex items-center space-x-4">
                   <ClockIcon className="h-6 w-6 text-indigo-600" />
                   <div>
-                    <p className="font-semibold text-gray-900">Business Hours</p>
-                    <div className="flex items-center gap-2">
-                      <p className="text-gray-600">{shop.hours}</p>
-                      <span className={`px-2 py-1 text-xs font-medium rounded-full ${
-                        isShopOpen() 
-                          ? 'bg-green-100 text-green-800' 
-                          : 'bg-red-100 text-red-800'
-                      }`}>
-                        {isShopOpen() ? 'Open Now' : 'Closed'}
-                      </span>
-                    </div>
+                    <p className="text-gray-600 font-medium">Business Hours</p>
+                    <p className="text-gray-900 font-semibold">{shop.businessHours}</p>
                   </div>
                 </div>
-                <div className="flex items-center space-x-3">
+                <div className="flex items-center space-x-4">
                   <MapPinIcon className="h-6 w-6 text-indigo-600" />
                   <div>
-                    <p className="font-semibold text-gray-900">Location</p>
-                    <p className="text-gray-600">{shop.location}</p>
+                    <p className="text-gray-600 font-medium">Location</p>
+                    <p className="text-gray-900 font-semibold">{shop.location}</p>
                   </div>
                 </div>
               </div>
